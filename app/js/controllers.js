@@ -16,12 +16,11 @@ gradationListControllers.controller("GradationListCtrl", function($scope, $http,
     'remark1' : 'Remark 1',
     'remark2' : 'Remark 2'
   };
+  $scope.sortable_keys = ["name", "circle", "dob", "hometown", "appointment", "55on", "58on", "promotion", "recruitment"];
   $scope.retired = 'all';
   $scope.query = '';
-
-  //$scope.checkRetired = function(value, index){
-  //  return !GradationListService.is_retired_on(value['58on']);
-  //};
+  $scope.orderKey = '';
+  $scope.retirement_age = '58on';
 
   $http.get('data/gradation-list.json')
   .success(function(data, status, headers, config){

@@ -27,18 +27,36 @@
               <label for="search">Search</label>
               <input type="text" class="form-control" id="search" placeholder="Search" ng-model="search">
             </div>
-            <label class="radio-inline">
-              <input type="radio" name="optionsRadios" ng-model="retired" value="all">
-              Show All
-            </label>
-            <label class="radio-inline">
-              <input type="radio" name="optionsRadios" ng-model="retired" value="retired">
-              Show Retired Only
-            </label>
-            <label class="radio-inline">
-              <input type="radio" name="optionsRadios" ng-model="retired" value="not_retired">
-              Remove Retired
-            </label>
+            <div class="form-group" style="margin-right: 50px;">
+              <label class="radio-inline">
+                <input type="radio" name="optionsRadios" ng-model="retired" value="all">
+                Show All
+              </label>
+              <label class="radio-inline">
+                <input type="radio" name="optionsRadios" ng-model="retired" value="retired">
+                Show Retired Only
+              </label>
+              <label class="radio-inline">
+                <input type="radio" name="optionsRadios" ng-model="retired" value="not_retired">
+                Remove Retired
+              </label>
+            </div>
+            <div class="form-group" style="margin-right: 50px;">
+              <label class="radio-inline">
+                <input type="radio" name="optionsRadios1" ng-model="retirement_age" value="55on">
+                Retired At 55
+              </label>
+              <label class="radio-inline">
+                <input type="radio" name="optionsRadios1" ng-model="retirement_age" value="58on">
+                Retired At 58
+              </label>
+            </div>
+            <div class="form-group" style="margin-right: 50px;">
+              <select class="form-control" ng-model="orderKey">
+                <option value="">Order By</option>
+                <option ng-repeat="key in sortable_keys" value="{{key}}">{{table_header_map[key]}}</option>
+              </select>
+            </div>
           </form>
         </div>
       </div>
@@ -51,7 +69,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr ng-repeat="candidate in candidates | filter: search | filterRetired: retired">
+              <tr ng-repeat="candidate in candidates | customOrder: orderKey | filter: search | filterRetired: retired:retirement_age">
                 <td>{{$index + 1}}</td>
                 <td ng-repeat="key in table_header_order | filter: '!serial'">{{candidate[key]}}</td>
               </tr>
