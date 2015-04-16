@@ -69,7 +69,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr ng-repeat="candidate in candidates | customOrder: orderKey | filter: search | filterRetired: retired:retirement_age">
+              <tr ng-repeat="candidate in candidates | filter: search | filterRetired: retired:retirement_age | customOrder: orderKey">
                 <td>{{$index + 1}}</td>
                 <td ng-repeat="key in table_header_order | filter: '!serial'">{{candidate[key]}}</td>
               </tr>

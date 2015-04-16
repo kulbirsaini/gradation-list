@@ -4,7 +4,8 @@ gradationListFilters.filter('filterRetired', function(GradationListService){
   return function(collection, retired, retirement_age){
     console.log(retired);
     if (!angular.isArray(collection) || retired == "all" || retirement_age === ""){ return collection; }
-    return jQuery(collection).filter(function(index, object){
+
+    var filtered = jQuery(collection).filter(function(index, object){
       if (retired == 'retired'){
         return GradationListService.is_retired_on(object[retirement_age]);
       } else if (retired == 'not_retired'){
@@ -13,6 +14,7 @@ gradationListFilters.filter('filterRetired', function(GradationListService){
         return false;
       }
     });
+    return filtered;
   };
 });
 
